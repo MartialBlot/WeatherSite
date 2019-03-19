@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+  <title>HTTP Request</title>
+</head>
+<body>
+<form name="formbarre">
+ <input type="email" placeholder="Saisir Ville" id="navg" style="width:350px; height:50px; padding-left:250px; font-size:40px; background-color: yellow;">
+</form>
+<button id="btn" style="background-color: blue; color:white; width:200px;height:30px;">Afficher la météo</button>
+<script>
+  const appKey = "cd884c45234448bf53793e08e36f8a39";
+  const val = document.getElementById("btn");
+  let searchBar = document.getElementById("navg");
+  //let city=prompt("Quelle ville?");
+  //searchBar.value=city;
+  searchBar.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + searchBar.value + "&APPID=" + appKey)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(res) {
+      console.log(res);
+      //console.log(Math.round(res.main.temp - 273));
+      const temp = Math.round(res.main.temp - 273);
+      
+        alert("temperature : "+ temp + "°");
+    })
+  }
+});
+  val.onclick = function (){
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + searchBar.value + "&APPID=" + appKey)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(res) {
+      console.log(res);
+      //console.log(Math.round(res.main.temp - 273));
+      const temp = Math.round(res.main.temp - 273);
+      
+        alert("temperature : "+ temp + "°");
+    })
+  }
+</script>
+  </body>
+</html>
